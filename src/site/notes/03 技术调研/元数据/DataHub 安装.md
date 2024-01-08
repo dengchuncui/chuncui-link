@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/03 技术调研/元数据/DataHub 安装/"}
+{"dg-publish":true,"permalink":"/03 技术调研/元数据/DataHub 安装/","noteIcon":""}
 ---
 
 > 本文参考 https://datahubproject.io/docs/quickstart#install-the-datahub-cli
