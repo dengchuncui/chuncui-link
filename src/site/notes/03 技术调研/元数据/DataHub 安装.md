@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/03 技术调研/元数据/DataHub 安装/","noteIcon":"","created":"2024-01-08T15:19:18.714+08:00","updated":"2024-01-08T20:31:04.484+08:00"}
+{"dg-publish":true,"permalink":"/03 技术调研/元数据/DataHub 安装/","noteIcon":"","created":"2024-01-08T15:19:18.714+08:00","updated":"2024-01-08T21:08:34.140+08:00"}
 ---
 
 > 本文参考 https://datahubproject.io/docs/quickstart#install-the-datahub-cli
@@ -15,3 +15,6 @@ datahub version
 123123
 
 1231231
+
+
+周超测试
