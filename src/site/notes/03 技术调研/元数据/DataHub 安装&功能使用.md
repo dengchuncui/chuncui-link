@@ -1,14 +1,21 @@
 ---
-{"dg-publish":true,"permalink":"/03 技术调研/元数据/DataHub 安装&功能使用/","noteIcon":"","created":"2024-01-08T15:19:18.714+08:00","updated":"2024-01-09T20:30:16.783+08:00"}
+{"dg-publish":true,"permalink":"/03 技术调研/元数据/DataHub 安装&功能使用/","noteIcon":"","created":"2024-01-08T15:19:18.714+08:00","updated":"2024-01-16T19:35:28.576+08:00"}
 ---
 
 > 本文参考 https://datahubproject.io/docs/quickstart#install-the-datahub-cli
 ## 1.安装DataHub CLI
 ```
+python3 -m venv venv # create the environment  
+source ~/venv/bin/activate
 python3 -m pip install --upgrade pip wheel setuptools  
 python3 -m pip install --upgrade acryl-datahub  
 datahub version
 ```
+python3 -m venv venv 
+创建python 虚拟环境并且使用，目前测试下来 Python 3.11.5 版本没问题 3.8 会有一些组件版本问题，
+==deactivate 退出虚拟环境==
+删除虚拟环境 rm -rf ~/venv (虚拟环境名称)
+
 ![image.png](https://s2.loli.net/2024/01/08/WeA2ISmM4xjJw7G.png)
 ## 2.安装DataHub 
 我本地环境是m1芯片所以增加 **--arch m1** 参数
@@ -22,17 +29,17 @@ datahub docker quickstart --arch m1
 ## 3.访问DataHub 
 > 访问http://localhost:9002/ 账号密码默认均为datahub
 
-看到下面的界面则为安装成功
+- 看到下面的界面则为安装成功
 ![image.png](https://s2.loli.net/2024/01/09/ClieT4EtjHY2dcM.png)
 ## 4. 通过产品UI配置元数据采集
-进入元数据采集模块
+- 进入元数据采集模块
 ![image.png](https://s2.loli.net/2024/01/09/eRNcrkiCdhuO17z.png)
-配置数据源
+- 配置数据源
 ![image.png](https://s2.loli.net/2024/01/09/a5JjN8xdSRIfFYP.png)
-元数据采集实例
+- 元数据采集实例
 ![image.png](https://s2.loli.net/2024/01/09/HCLYXFeJc3twfdz.png)
 ## 5. 通过Cli配置元数据采集
-安装mysql采集器
+- 安装mysql采集器
 ```
 pip install 'acryl-datahub[mysql]'
 ```
@@ -40,13 +47,20 @@ pip install 'acryl-datahub[mysql]'
 
 > 安装过程中报错
 > ![image.png](https://s2.loli.net/2024/01/09/KHtdbuzYEAqxGJ6.png)
-> 是这个错误信息来自于使用 Meson 构建系统时出现的问题。Meson 是一个项目构建系统，用于编译和生成代码。错误信息表明 Meson 无法识别或找到列出的 Fortran 编译器（`gfortran`, `flang`, `nvfortran`, `pgfortran`, `ifort`, `ifx`, `g95` 等）
-> 因为我是mac m1 芯片所以使用 brew install gcc 命令安装 GCC，其中包括 `gfortran`。
+> （1）是这个错误信息来自于使用 Meson 构建系统时出现的问题。Meson 是一个项目构建系统，用于编译和生成代码。错误信息表明 Meson 无法识别或找到列出的 Fortran 编译器（`gfortran`, `flang`, `nvfortran`, `pgfortran`, `ifort`, `ifx`, `g95` 等）
+> （2）因为我是mac m1 芯片所以使用 brew install gcc 命令安装 GCC，其中包括 `gfortran`。
+> （3）在安装gcc的时候发现hung在了make阶段，需要很久时间查阅了相关资料https://stackoverflow.com/questions/24966404/brew-install-gcc-too-time-consuming
+> 发现很多人都有相关问题，最终尝试使用port安装工具进行安装，
+> https://ports.macports.org/port/gcc12/
+> 目前正在验证中。
+
+
+> ![image.png](https://s2.loli.net/2024/01/09/FONerMbRP2knLSI.png)
 
 
 否则报错如下
 ![image.png](https://s2.loli.net/2024/01/09/yphIGS4VWfJj7vN.png)
-创建采集器的配置文件
+- 创建采集器的配置文件
 ```
 source:
   type: mysql
@@ -71,4 +85,7 @@ sink:
   config:
     server: "http://localhost:8080"
 ```
-通过datahub cli 执行元数据采集
+- 通过datahub cli 执行元数据采集
+```
+datahub ingest -c  mysql-datahub.yml
+```
