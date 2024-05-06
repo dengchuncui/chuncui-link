@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/03 技术调研/元数据/DataHub 安装&功能使用/","noteIcon":"","created":"2024-01-08T15:19:18.714+08:00","updated":"2024-01-16T19:35:28.576+08:00"}
+{"dg-publish":true,"permalink":"/03 技术调研/元数据/DataHub 安装&功能使用/","noteIcon":"","created":"2024-01-08T15:19:18.714+08:00","updated":"2024-04-30T16:55:53.438+08:00"}
 ---
 
 > 本文参考 https://datahubproject.io/docs/quickstart#install-the-datahub-cli
@@ -12,7 +12,7 @@ python3 -m pip install --upgrade acryl-datahub
 datahub version
 ```
 python3 -m venv venv 
-创建python 虚拟环境并且使用，目前测试下来 Python 3.11.5 版本没问题 3.8 会有一些组件版本问题，
+	创建python 虚拟环境并且使用，目前测试下来 Python 3.11.5 版本没问题 3.8 会有一些组件版本问题，
 ==deactivate 退出虚拟环境==
 删除虚拟环境 rm -rf ~/venv (虚拟环境名称)
 
